@@ -1,0 +1,73 @@
+{% extends 'adminhome.html' %}
+{% block content %}
+<style>
+    body {
+        background-color: rgb(164, 241, 250);
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+    }
+
+    h3 {
+        text-align: center;
+        margin: 10px;
+        color: rgb(86, 3, 86);
+        padding-bottom: 20px;
+    }
+
+    .content {
+        margin-top: 90px;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: rgba(255, 255, 255, 0.538);
+        box-shadow: 10px 10px 20px rgba(0, 0, 0, 8);
+        width: 30%;
+        height: 550px;
+        border-radius: 8px;
+        padding: 25px;
+    }
+    .content form{
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+    }
+    .content input {
+        margin: 15px;
+        padding: 8px;
+        width: 100%;   
+    }
+    .content select{
+        margin: 15px;
+        width: 100%;
+        padding: 8px;
+    }
+    .content button {
+        margin-top: 10px;
+        padding: 6px;
+        background-color: rgb(86, 3, 86);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+    }
+</style>
+
+<div class="content">
+    <h3>ADD STUDENT</h3>
+    <form action="{% url 'saveStudent' %}" method="post">
+        {% csrf_token %}
+        <input type="text" placeholder="Enter Name" name="s_name">
+        <input type="text" placeholder="Address" name="s_add">
+        <input type="number" placeholder="Age" name="s_age">
+        <input type="date" name="jod">
+        <select name="course" id="">
+            <option selected disabled>Select Course</option>
+            {% for c in course %}
+            <option value="{{c.id}}">{{c.course_name}}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'adminhome.html' %}
+{% block content %}
+<style>
+    table.table-bordered, table.table-bordered th, table.table-bordered td{
+        border: 1px solid black;
+        background-color: rgb(245, 245, 220,0.538);
+    }
+    th,td{
+        text-align: center;
+    }
+    h2{
+        color: rgb(86, 3, 86);
+    }
+
+</style>
+
+<div class="container">
+    <center>
+       <h2 class="mt-5"><ins>Teacher Details</ins></h2>
+    </center>
+    <table class="table table-bordered table-sm mt-5">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Age</th>
+                <th>Contact Number</th>
+                <th>Course</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for t in teacher %}
+            <tr>
+                <td>{{t.user.first_name}}</td>
+                <td>{{t.user.last_name}}</td>
+                <td>{{t.user.username}}</td>
+                <td>{{t.user.email}}</td>
+                <td>{{t.address}}</td>
+                <td>{{t.age}}</td>
+                <td>{{t.mobile}}</td>
+                <td>{{t.course.course_name}}</td>
+                <td><img src="{{t.image.url}}" alt="" width="150px"></td>
+                <td><a href="{% url 'deleteTeacher' t.id %}"><button>Delete</button></a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

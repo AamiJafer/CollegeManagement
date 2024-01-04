@@ -1,0 +1,50 @@
+{% extends 'adminhome.html' %}
+{% block content %}
+<style>
+    
+    table.table-bordered, table.table-bordered th, table.table-bordered td{
+        border: 1px solid black;
+        background-color: rgb(245, 245, 220,0.538);
+    }
+    th,td{
+        text-align: center;
+    }
+    h2{
+        color: rgb(86, 3, 86);
+    }
+
+</style>
+
+<div class="container">
+    <center>
+       <h2 class="mt-5"><ins>Students Details</ins></h2>
+    </center>
+    <table class="table table-bordered table-sm mt-5">
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Address</th>
+                <th>Age</th>
+                <th>Date of Joining</th>
+                <th>Course</th>
+                <th>Fee</th>
+                <th colspan="2">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in stud %}
+            <tr>
+                <td>{{s.student_name}}</td>
+                <td>{{s.student_address}}</td>
+                <td>{{s.student_age}}</td>
+                <td>{{s.joining_date}}</td>
+                <td>{{s.course.course_name}}</td>
+                <td>{{s.course.course_fee}}</td>
+                <td><a href="{% url 'editStudent' s.id %}"><button>Edit</button></a></td>
+                <td><a href="{% url 'deleteStudent' s.id %}"><button>Delete</button></a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

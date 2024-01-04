@@ -1,0 +1,84 @@
+{% extends 'userhome.html' %}
+{% block content %}
+<style>
+    body {
+        /* background-color: rgba(214, 175, 243, 0.5); */
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+    }
+
+    h3 {
+        text-align: center;
+        margin: 10px;
+        color: rgb(86, 3, 86);
+        padding-bottom: 20px;
+    }
+
+    .content {
+        margin-top: 30px;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: rgba(255, 255, 255, 0.538);
+        box-shadow: 10px 10px 20px rgba(0, 0, 0, 8);
+        width: 30%;
+        height: 970px;
+        border-radius: 8px;
+        padding: 25px;
+    }
+    .content form{
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+    }
+    .content input {
+        margin: 15px;
+        padding: 5px;
+        width: 100%;   
+    }
+    .content select{
+        margin: 15px;
+        width: 100%;
+        padding: 8px;
+    }
+    .content button {
+        margin-top: 10px;
+        padding: 6px;
+        background-color: rgb(86, 3, 86);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+    }
+</style>
+
+<div class="content">
+    <h3>EDIT</h3>
+    <form enctype="multipart/form-data" action="{% url 'updateTeacher' %}" method="post">
+        {% csrf_token %}
+        <input type="text" placeholder="First Name" name="fname" value="{{teacher.user.first_name}}">
+        <input type="text" placeholder="Last Name" name="lname" value="{{teacher.user.last_name}}">
+        <input type="text" placeholder="Username" name="uname" value="{{teacher.user.username}}">
+        <!-- <input type="password" placeholder="Password" name="password" value="{{teacher.user.password}}"> -->
+        <input type="text" placeholder="Enter Address" name="address" value="{{teacher.address}}">
+        <input type="number" placeholder="Age" name="age"  value="{{teacher.age}}">
+        <input type="email" placeholder="Email Address" name="email"  value="{{teacher.user.email}}">
+        <input type="text" placeholder="Contact Number" name="mob"  value="{{teacher.mobile}}">
+        <label>Photo</label>
+        <img src="{{teacher.image.url}}" alt="" width="100px">{{teacher.image}}
+        <br>
+        <input type="file" class="form-control-file border" name="img" accept="image/">
+        <select name="course" id="">
+            {% for c in course %}
+            {% if c.id == teacher.course.id %}
+                <option value="{{c.id}}" selected>{{c.course_name}}</option>
+            {% else %}
+            <option value="{{c.id}}">{{c.course_name}}</option>
+            {% endif %}
+            {% endfor %}
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,102 @@
+{% extends 'login.html' %}
+{% block content %}
+<style>
+    body {
+        background-color: rgb(164, 241, 250);
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+    }
+    nav{
+        height: 60px;
+        font-size: 30px;
+    }
+
+    h3 {
+        text-align: center;
+        margin: 10px;
+        color: rgb(86, 3, 86);
+        padding-bottom: 20px;
+    }
+
+    .content {
+        margin-top: 30px;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: rgba(255, 255, 255, 0.538);
+        box-shadow: 10px 10px 20px rgba(0, 0, 0, 8);
+        width: 30%;
+        height: 970px;
+        border-radius: 8px;
+        padding: 25px;
+    }
+    .content form{
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+    }
+    .content input {
+        margin: 15px;
+        padding: 5px;
+        width: 100%;   
+    }
+    .content select{
+        margin: 15px;
+        width: 100%;
+        padding: 8px;
+    }
+    .content button {
+        margin-top: 10px;
+        padding: 6px;
+        background-color: rgb(86, 3, 86);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+    }
+    .loginbtn button{
+        background-color: rgba(0, 0, 255, 0.347);
+        width: 150px;
+        height: 40px;
+        border-radius: 20px;
+    }
+    .loginbtn{
+        text-align: end;
+        padding: 30px;
+    }
+    p{
+        color: red;
+        font-weight: bold;
+    }
+    
+</style>
+<div class="loginbtn"><a href="{% url 'loginpage' %}"><button>LOGIN</button></a></div>
+<div class="content">
+    {% for m in messages %}
+    <p>This Username already exists!!!</p>
+    {% endfor %}
+    <h3>ADD TEACHER</h3>
+    <form enctype="multipart/form-data"  action="{% url 'saveTeacher' %}" method="post">
+        {% csrf_token %}
+        <input type="text" placeholder="First Name" name="fname">
+        <input type="text" placeholder="Last Name" name="lname">
+        <input type="text" placeholder="Username" name="uname">
+        <input type="password" placeholder="Password" name="password">
+        <input type="password" placeholder="Confirm Password" name="cpassword">
+        <input type="text" placeholder="Enter Address" name="address">
+        <input type="number" placeholder="Age" name="age">
+        <input type="email" placeholder="Email Address" name="email">
+        <input type="text" placeholder="Contact Number" name="mob">
+        <label>Upoload Your Photo</label>
+        <input type="file" class="form-control-file border" name="img" accept="image/">
+        <select name="course" id="">
+            <option selected disabled>Select Course</option>
+            {% for c in course %}
+            <option value="{{c.id}}">{{c.course_name}}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+{% endblock %}

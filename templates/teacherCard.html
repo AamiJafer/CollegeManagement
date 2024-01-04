@@ -1,0 +1,29 @@
+{% extends 'userhome.html' %}
+{% block content %}
+<style>
+    .content {
+            margin-top: 90px;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: rgba(255, 255, 255, 0.538);
+            box-shadow: 10px 10px 20px rgba(0, 0, 0, 8);
+            width: 30%;
+            height: fit-content;
+            border-radius: 8px;
+            padding: 25px;
+        }
+</style>
+    <div class="container">
+        <div class="content">
+            <img src="{{teacher.image.url}}" alt="" width="100%">
+            <h3>{{teacher.user.first_name}} {{teacher.user.last_name}}</h3>
+            <label>Email Address: {{teacher.user.email}}</label><br>
+            <label>Address: {{teacher.address}}</label><br>
+            <label>Age: {{teacher.age}}</label><br>
+            <label>Mobile Number: {{teacher.mobile}}</label><br>
+            <label>Course: {{teacher.course.course_name}}</label><br>
+            <a href="{% url 'userhome' %}">Go Back</a>
+        </div>
+        
+    </div>
+{% endblock %}
